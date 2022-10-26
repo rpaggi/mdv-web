@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth.apikey')->group(function(){
+    Route::get('/users', 'App\Http\Controllers\UserController@index');
+    Route::resource('person', 'App\Http\Controllers\PersonController')->except(['create', 'edit']);
+});

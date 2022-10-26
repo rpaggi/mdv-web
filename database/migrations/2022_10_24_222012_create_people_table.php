@@ -23,10 +23,11 @@ return new class extends Migration
             $table->integer("address_reference");
             $table->string("phone", 11);
             $table->integer("age");
-            $table->integer("acs");
+            $table->string("acs", 120);
 
             $table->foreign("address_city_id")->references("id")->on("cities")->onDelete("CASCADE");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
