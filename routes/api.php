@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth.apikey')->group(function(){
     Route::get('/users', 'App\Http\Controllers\UserController@index');
+    Route::get('/states', 'App\Http\Controllers\GeoControler@getStates');
+    Route::get('/cities', 'App\Http\Controllers\GeoControler@getCities');
     Route::resource('person', 'App\Http\Controllers\PersonController')->except(['create', 'edit']);
 });
