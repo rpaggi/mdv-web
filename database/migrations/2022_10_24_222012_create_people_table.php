@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string("document", 11);
             $table->string("address", 150);
             $table->unsignedInteger("address_city_id");
-            $table->integer("address_reference");
+            $table->integer("address_reference")->nullable();
             $table->string("phone", 11);
             $table->integer("age");
-            $table->string("acs", 120);
+            $table->string("acs", 120)->nullable();
 
             $table->foreign("address_city_id")->references("id")->on("cities")->onDelete("CASCADE");
             $table->timestamps();
