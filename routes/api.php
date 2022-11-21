@@ -23,4 +23,5 @@ Route::middleware('auth.apikey')->group(function(){
     Route::get('/states', 'App\Http\Controllers\GeoControler@getStates');
     Route::get('/cities', 'App\Http\Controllers\GeoControler@getCities');
     Route::resource('person', 'App\Http\Controllers\PersonController')->except(['create', 'edit']);
+    Route::post('/sync', 'App\Http\Controllers\SyncController@sync');
 });

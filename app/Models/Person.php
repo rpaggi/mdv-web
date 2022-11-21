@@ -17,8 +17,8 @@ class Person extends Model
       'nickname',
       'document',
       'address',
-      'addess_city_id',
-      'addess_reference',
+      'address_city_id',
+      'address_reference',
       'phone',
       'age',
       'acs',
@@ -26,5 +26,9 @@ class Person extends Model
 
     public function city(){
         return $this->belongsTo(City::class, 'address_city_id', 'id');
+    }
+
+    public function exams(){
+        return $this->hasMany(Exam::class);
     }
 }
