@@ -25,9 +25,9 @@ class SyncController extends Controller
         }catch(\Exception $e){
             \Log::error("[Erro ao gravar]");
             \Log::error($e);
-            return response()->json(false);
+            return response()->json(["status"=>false]);
         }
 
-        return response()->json(true);
+        return response()->json(["status"=>true]);
     }
 }
