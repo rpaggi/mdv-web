@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\PersonRequest;
-use App\Models\Person;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AgentRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class PersonController extends Controller
+class AgentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +17,16 @@ class PersonController extends Controller
      */
     public function index(Request $request)
     {
-        $builder = Person::query();
+        $builder = User::role("agent");
 
         if($request->filled("term")){
-            $builder->where('name', 'like', '%'.$request->term.'%');
+            $builder->where('name', 'like', "%$request->term%")
+                ->where('email', 'like', "%$request->term%");
         }
 
-        if($request->filled('json')){
-            return response()->json($builder->get());
-        }
+        return Inertia::render('Agent/List', [
+            "users" => $builder->paginate(8)
+        ]);
     }
 
     /**
@@ -33,7 +36,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Agent/Form');
     }
 
     /**
@@ -42,24 +45,15 @@ class PersonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PersonRequest $request)
+    public function store(AgentRequest $request)
     {
-        $person = Person::create($request->all());
+        $data = $request->all();
+        $data["password"] = "password";
+        $user = User::create($data);
+        $user->assignRole('agent');
+        $user->save();
 
-        if($request->filled('json')){
-            return response()->json($person);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('agents.index');
     }
 
     /**
@@ -70,7 +64,10 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return Inertia::render('Agent/Form',[
+            "agent" => $user
+        ]);
     }
 
     /**
@@ -80,15 +77,13 @@ class PersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PersonRequest $request, $id)
+    public function update(AgentRequest $request, $id)
     {
-        $person = Person::find($id);
+        $user = User::findOrFail($id);
 
-        $person->update($request->all());
+        $user->update($request->all());
 
-        if($request->filled('json')){
-            return response()->json($person);
-        }
+        return redirect()->route('agents.index');
     }
 
     /**
@@ -99,8 +94,6 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        $person = Person::find($id)->delete();
-
-        return response()->json("Person deleted");
+        User::findOrFail($id)->delete();
     }
 }

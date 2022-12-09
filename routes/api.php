@@ -18,10 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth.apikey')->group(function(){
-    Route::get('/users', 'App\Http\Controllers\UserController@index');
-    Route::get('/states', 'App\Http\Controllers\GeoControler@getStates');
-    Route::get('/cities', 'App\Http\Controllers\GeoControler@getCities');
-    Route::resource('person', 'App\Http\Controllers\PersonController')->except(['create', 'edit']);
-    Route::post('/sync', 'App\Http\Controllers\SyncController@sync');
+Route::middleware('auth.apikey')
+    ->namespace("App\Http\Controllers\Api")
+    ->group(function(){
+    Route::get('/users', 'UserController@index');
+    Route::get('/states', 'GeoControler@getStates');
+    Route::get('/cities', 'GeoControler@getCities');
+    Route::resource('person', 'PersonController')->except(['create', 'edit']);
+    Route::post('/sync', 'SyncController@sync');
 });

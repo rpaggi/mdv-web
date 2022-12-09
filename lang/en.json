@@ -1,0 +1,10 @@
+{
+  "Unauthorized": "Sem autorização",
+  "Forbidden": "Acesso proibido",
+  "Not Found": "Página não encontrada",
+  "Page Expired": "Página expirada",
+  "Server Error": "Erro interno",
+  "Service Unavailable": "Serviço indisponivel",
+  "User does not have the right roles.": "Usuário sem permissão de acesso.",
+  "All rights reserved.": "Todos os direitos reservados."
+}

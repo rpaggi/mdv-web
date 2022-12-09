@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Guiliredu\BrazilianCityMigrationSeed\Models\City;
 use Guiliredu\BrazilianCityMigrationSeed\Models\State;
 use Illuminate\Http\Request;
