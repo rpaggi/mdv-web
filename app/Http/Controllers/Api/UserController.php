@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(Request $request){
-        $users = User::role("agent")->all();
+        $users = User::role("agent")->get();
 
         if($request->filled('json')){
             return response()->json($users, 200);
