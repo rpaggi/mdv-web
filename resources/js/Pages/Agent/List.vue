@@ -93,6 +93,9 @@ export default {
     }
   },
   methods:{
+    search(){
+      this.$inertia.visit(`${route('agents.index')}?term=${this.term}`)
+    },
     deleteItem(id){
       this.$swal.fire({
         title: 'Você tem certeza que deseja excluir?',

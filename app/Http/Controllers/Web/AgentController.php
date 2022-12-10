@@ -21,7 +21,7 @@ class AgentController extends Controller
 
         if($request->filled("term")){
             $builder->where('name', 'like', "%$request->term%")
-                ->where('email', 'like', "%$request->term%");
+                ->orWhere('email', 'like', "%$request->term%");
         }
 
         return Inertia::render('Agent/List', [

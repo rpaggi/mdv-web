@@ -29,6 +29,6 @@ class Person extends Model
     }
 
     public function exams(){
-        return $this->hasMany(Exam::class);
+        return $this->hasMany(Exam::class,'person_id', 'id');
     }
 }

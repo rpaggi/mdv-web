@@ -17,6 +17,6 @@ class Exam extends Model
     ];
 
     public function person(){
-        $this->belongsTo(Person::class);
+        return $this->belongsTo(Person::class);
     }
 }
