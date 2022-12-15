@@ -31,6 +31,7 @@ Route::middleware([
 
     Route::namespace('App\Http\Controllers\Web')->group(function(){
         Route::resource('agents','AgentController')->except(["show"]);
+        Route::resource('products','ProductController')->except(["show"]);
         Route::resource('exams','ExamController')->except(["edit", "update", "store", "create", "destroy"]);
     });
 });
