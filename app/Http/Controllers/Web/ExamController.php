@@ -49,7 +49,7 @@ class ExamController extends Controller
      */
     public function show($id)
     {
-        $exam = Exam::with(['person'])->findOrFail($id);
+        $exam = Exam::with(['person', 'person.city', 'person.city.state'])->findOrFail($id);
 
         return Inertia::render('Exam/Show', [
             "exam" => $exam

@@ -120,7 +120,6 @@ export default {
       return `${cpf.substr(-11, 3)}.${cpf.substr(-8, 3)}.${cpf.substr(-5, 3)}-${cpf.substr(-2)}`
     },
     rowClick(item){
-      return
       this.$inertia.visit(route('exams.show', item.id))
     },
     datepickerFormater(date){
