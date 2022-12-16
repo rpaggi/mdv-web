@@ -12,10 +12,15 @@ class Sell extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        "person_id"
+        "person_id",
+        "status"
     ];
 
     public function person(){
-        return $this->hasOne(Person::class);
+        return $this->belongsTo(Person::class);
+    }
+
+    public function items(){
+        return $this->hasMany(SellItem::class);
     }
 }

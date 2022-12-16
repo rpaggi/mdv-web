@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
             $table->foreignId("person_id")->constrained();
+            $table->integer("status")->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

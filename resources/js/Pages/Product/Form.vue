@@ -93,6 +93,7 @@ export default {
     if(this.product){
       this.form = { ...
         this.product,
+        value:this.product.value.toFixed(2)
       }
       this.title = "Editar"
     }

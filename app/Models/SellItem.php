@@ -15,6 +15,7 @@ class SellItem extends Model
       "sell_id",
       "product_id",
       "quantity",
+      "value",
       "discount"
     ];
 
@@ -23,6 +24,6 @@ class SellItem extends Model
     }
 
     public function product(){
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

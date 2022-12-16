@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId("sell_id")->constrained();
             $table->foreignId("product_id")->constrained();
             $table->integer("quantity");
+            $table->float("value");
             $table->float("discount");
             $table->timestamps();
             $table->softDeletes();

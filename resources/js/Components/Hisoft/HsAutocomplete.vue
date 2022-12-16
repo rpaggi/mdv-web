@@ -113,6 +113,11 @@ export default {
     if(!this.displayValue){
       this.displayList = this.list.slice(0,this.listSize)
     }
+    if(this.modelValue){
+      if(this.displayValue !== this.modelValue[this.fieldLabel]){
+        this.displayValue = this.modelValue[this.fieldLabel]
+      }
+    }
   },
   start(){
     setTimeout(()=>{
