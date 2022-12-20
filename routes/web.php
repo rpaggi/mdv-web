@@ -32,7 +32,8 @@ Route::middleware([
     Route::namespace('App\Http\Controllers\Web')->group(function(){
         Route::resource('agents','AgentController')->except(["show"]);
         Route::resource('products','ProductController')->except(["show"]);
-        Route::resource('sells','SellController')->except([]);
+        Route::resource('sells','SellController')->except(["edit", "update", "destroy"]);
+        Route::post('sells/{id}/cancel','SellController@cancel')->name("sells.cancel");
         Route::resource('exams','ExamController')->except(["edit", "update", "store", "create", "destroy"]);
     });
 });

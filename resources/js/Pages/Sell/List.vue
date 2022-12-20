@@ -30,15 +30,20 @@
             <hs-table
                 :columns="columns"
                 :items="sells.data"
+                @rowClick="rowClick"
             >
               <template v-slot:value="data">
                 {{ Intl.NumberFormat("pt-BR", {style: "currency",currency: "BRL",}).format(sumValue(data.item)) }}
               </template>
+              <template v-slot:status="data">
+                <span v-if="data.item.status == 0" class="text-green-600">Concluída</span>
+                <span v-else class="text-red-600">Cancelada</span>
+              </template>
               <template v-slot:action="data">
                 <div class="flex justify-end">
-                  <a class="hover:text-gray-900 cursor-pointer" :href="route('sells.edit',{sell:data.item.id})" @click.stop="()=>{}">
+                  <!--a class="hover:text-gray-900 cursor-pointer" :href="route('sells.edit',{sell:data.item.id})" @click.stop="()=>{}">
                     <i class="fal fa-edit"></i>
-                  </a>
+                  </a-->
                 </div>
               </template>
             </hs-table>
@@ -78,7 +83,7 @@ export default {
           field: 'id'
         },
         {
-          class:'w-6/12',
+          class:'w-4/12',
           name: 'Cliente',
           field: 'person.name'
         },
@@ -86,6 +91,11 @@ export default {
           class:'w-2/12',
           name: 'Valor',
           field: 'value'
+        },
+        {
+          class:'w-2/12',
+          name: 'Status',
+          field: 'status'
         },
 
         {
@@ -102,7 +112,10 @@ export default {
     },
     sumValue(sell){
       return sell.items.reduce((acc,curr) => acc += (curr.value - curr.discount), 0)
-    }
+    },
+    rowClick(item){
+      this.$inertia.visit(route('sells.show', item.id))
+    },
   },
   mounted() {
     const queryString = window.location.search;

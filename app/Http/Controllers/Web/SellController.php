@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SellRequest;
 use App\Models\Person;
 use App\Models\Product;
 use App\Models\Sell;
+use App\Models\SellItem;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -54,9 +56,19 @@ class SellController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SellRequest $request)
     {
-        //
+        $sell = Sell::create([
+            "person_id" => $request->person["id"]
+        ]);
+
+        foreach ($request->items as $item){
+            $item["sell_id"] = $sell->id;
+            $sellItem = SellItem::create($item);
+            Product::find($item["product_id"])->removeQuantity($item["quantity"]);
+        }
+
+        return redirect()->route('sells.show', ["sell"=>$sell->id]);
     }
 
     /**
@@ -67,7 +79,9 @@ class SellController extends Controller
      */
     public function show($id)
     {
-        //
+        $sell = Sell::with("person", "items", "items.product")->where('id', $id)->firstOrFail();
+
+        return Inertia::render("Sell/Show", ["sell"=>$sell]);
     }
 
     /**
@@ -102,5 +116,9 @@ class SellController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cancel($id){
+        Sell::findOrFail($id)->update(["status"=>1]);
     }
 }

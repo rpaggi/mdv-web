@@ -16,4 +16,9 @@ class Product extends Model
       "value",
       "quantity"
     ];
+
+    public function removeQuantity($quantity){
+        $this->quantity -= $quantity;
+        $this->save();
+    }
 }

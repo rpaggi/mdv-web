@@ -12,7 +12,7 @@
           <div class="w-full mb-3 mt-3">
             <hs-autocomplete
                 label="Cliente"
-                :error="errors.person_id"
+                :error="errors.person"
                 :list="people"
                 fieldLabel="name"
                 v-model="form.person"
@@ -38,13 +38,14 @@
               </div>
             </div>
             <ul>
-              <li v-for="(item, index) in form.items" class="mb-3 space-x-4">
+              <li v-for="(item, index) in form.items" class="mb-3 space-x-4 flex items-start">
                 <div class="inline-block w-3/12">
                   <hs-autocomplete
                     :list="products"
                     field-label="description"
                     v-model="item.product"
                     @update:modelValue="(v)=>{ updateValue(v, index) }"
+                    :error="errors[`items.${index}.product_id`] ? 'O campo produto é obrigatório' : ''"
                   ></hs-autocomplete>
                 </div>
                 <div class="inline-block w-2/12">
@@ -53,11 +54,13 @@
                 <div class="inline-block w-2/12">
                   <hs-input-number
                       v-model="item.quantity"
+                      :error="errors[`items.${index}.quantity`] ? 'O campo quantidade é obrigatório' : ''"
                   />
                 </div>
                 <div class="inline-block w-2/12">
                   <hs-input-money
                       v-model="item.discount"
+                      :error="errors[`items.${index}.discount`] ? 'O campo quantidade é obrigatório' : ''"
                   />
                 </div>
                 <div class="inline-block w-1/12">
@@ -163,6 +166,7 @@ export default {
     updateValue(v, index){
       if(v==null) this.form.items[index].value = 0
       this.form.items[index].value = v.value
+      this.form.items[index].product_id = v.id
     },
     getTotal(index){
       let item = this.form.items[index]

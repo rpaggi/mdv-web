@@ -172,6 +172,7 @@ return [
             'neighborhood' => 'bairro',
             'number'    => 'número',
             'password'  => 'senha',
+            'person'    => 'cliente',
             'phone'     => 'telefone',
             'second'    => 'segundo',
             'sex'       => 'sexo',
