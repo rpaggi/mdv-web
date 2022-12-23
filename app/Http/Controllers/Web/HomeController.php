@@ -46,8 +46,8 @@ class HomeController extends Controller
         $query = DB::table('users as u')
             ->join('exams as e', 'u.id', '=', 'e.agent_id')
             ->selectRaw('u.name, count(e.id) as count')
-            ->where('e.exam_at', '>=', $startDate)
-            ->where('e.exam_at', '<=', $endDate)
+            ->where('e.created_at', '>=', $startDate)
+            ->where('e.created_at', '<=', $endDate)
             ->orderBy('u.name')
             ->groupBy('u.id')
             ->get();
