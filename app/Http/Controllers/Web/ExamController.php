@@ -55,4 +55,12 @@ class ExamController extends Controller
             "exam" => $exam
         ]);
     }
+
+    public function formReport($id){
+        $exam = Exam::with(['person', 'person.city', 'person.city.state'])->findOrFail($id);
+
+        return Inertia::render('Exam/Report', [
+            "exam" => $exam
+        ]);
+    }
 }
