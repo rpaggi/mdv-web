@@ -21,6 +21,7 @@ class SyncController extends Controller
 
             Exam::create([
                 "person_id" => $person->id,
+                "agent_id" => $data["user_id"],
                 "exam_at" => Carbon::parse($date." ".$hour)
             ]);
         }catch(\Exception $e){

@@ -25,11 +25,10 @@ Route::middleware([
     'verified',
     'role:admin'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
 
     Route::namespace('App\Http\Controllers\Web')->group(function(){
+        Route::get('dashboard', 'HomeController@index')->name('dashboard');
+        Route::get('dashboard/exam-by-agent', 'HomeController@examByAgent')->name('dashboard.exam-by-agent');
         Route::resource('agents','AgentController')->except(["show"]);
         Route::resource('products','ProductController')->except(["show"]);
         Route::resource('sells','SellController')->except(["edit", "update", "destroy"]);

@@ -13,10 +13,15 @@ class Exam extends Model
 
     protected $fillable = [
         "person_id",
+        "agents_id",
         "exam_at"
     ];
 
     public function person(){
         return $this->belongsTo(Person::class);
+    }
+
+    public function agent(){
+        return $this->belongsTo(User::class, 'agent_id');
     }
 }
