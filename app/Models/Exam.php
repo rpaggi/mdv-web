@@ -13,7 +13,7 @@ class Exam extends Model
 
     protected $fillable = [
         "person_id",
-        "agents_id",
+        "agent_id",
         "exam_at"
     ];
 
