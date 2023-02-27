@@ -56,6 +56,10 @@
 
             <div class="flex mt-3">
               <div class="w-4/12">
+                <p class="font-bold">Distrito:</p>
+                <p>{{exam.person.district}}</p>
+              </div>
+              <div class="w-4/12">
                 <p class="font-bold">Cidade:</p>
                 <p>{{exam.person.city.title}}</p>
               </div>
@@ -63,13 +67,13 @@
                 <p class="font-bold">Estado:</p>
                 <p>{{exam.person.city.state.title}}</p>
               </div>
+            </div>
+
+            <div class="flex mt-3">
               <div class="w-4/12">
                 <p class="font-bold">Telefone:</p>
                 <p>{{formatPhone(exam.person.phone)}}</p>
               </div>
-            </div>
-
-            <div class="flex mt-3">
               <div class="w-4/12">
                 <p class="font-bold">ACS:</p>
                 <p>{{exam.person.acs ?? '-'}}</p>
