@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "doctrine/dbal": "^3.6",
         "ejarnutowski/laravel-api-key": "^1.0",
         "guiliredu/laravel-seed-migration-estados-cidades-brasil": "dev-master",
         "guzzlehttp/guzzle": "^7.2",
