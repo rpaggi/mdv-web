@@ -19,6 +19,7 @@ class Person extends Model
       'address',
       'address_city_id',
       'address_reference',
+      'district',
       'phone',
       'age',
       'acs',
