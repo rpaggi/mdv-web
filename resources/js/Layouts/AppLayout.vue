@@ -58,12 +58,6 @@ const logout = () => {
                                 <NavLink :href="route('exams.index')" :active="route().current('exams.*')">
                                   Agendamentos
                                 </NavLink>
-                                <NavLink :href="route('products.index')" :active="route().current('products.*')">
-                                  Produtos
-                                </NavLink>
-                                <NavLink :href="route('sells.index')" :active="route().current('sells.*')">
-                                  Vendas
-                                </NavLink>
                             </div>
                         </div>
 
