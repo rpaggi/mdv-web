@@ -1,12 +1,12 @@
 <template>
   <div class="book">
-    <div class="page">
+    <div v-for="exam in exams" class="page">
       <div class="subpage">
         <!-- CADASTRO -->
         <div class="flex justify-between items-center">
           <img src="/assets/img/logo.svg" style="height: 50px">
           <h1 class="font-bold">CADASTRO</h1>
-          <p><span class="mr-4 inline">Data: {{formatedDate}}</span> <span>Horário: {{ formatedHour }}</span></p>
+          <p><span class="mr-4 inline">Data: {{formatedDate(exam.exam_at)}}</span> <span>Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
         <div class="border border-gray-700 mt-2">
           <!--ROW-->
@@ -25,11 +25,11 @@
           <div class="border-b border-gray-700">
             <div class="inline-block w-7/12">
               <span class="bg-gray-200 cell-a font-bold">Telefone: </span>
-              <span class="px-2">{{formatedPhone}}</span>
+              <span class="px-2">{{formatedPhone(exam.person.phone)}}</span>
             </div>
             <div class="inline-block w-5/12">
               <span class="bg-gray-200 cell-a font-bold">CPF: </span>
-              <span class="px-2">{{formatedDocument}}</span>
+              <span class="px-2">{{formatedDocument(exam.person.document)}}</span>
             </div>
           </div>
 
@@ -233,7 +233,7 @@
         <div class="flex justify-between items-center">
           <img src="/assets/img/logo.svg" style="height: 50px">
           <h1 class="font-bold">DECLARAÇÃO</h1>
-          <p><span class="mr-4 inline">Data: {{formatedDate}}</span> <span>Horário: {{ formatedHour }}</span></p>
+          <p><span class="mr-4 inline">Data: {{ formatedDate(exam.exam_at) }}</span> <span>Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
         <div class="border border-gray-700 mt-2">
           <!--ROW-->
@@ -252,11 +252,11 @@
           <div class="border-b border-gray-700">
             <div class="inline-block w-7/12">
               <span class="bg-gray-200 cell-a font-bold">Telefone: </span>
-              <span class="px-2">{{formatedPhone}}</span>
+              <span class="px-2">{{ formatedPhone(exam.person.phone) }}</span>
             </div>
             <div class="inline-block w-5/12">
               <span class="bg-gray-200 cell-a font-bold">CPF: </span>
-              <span class="px-2">{{formatedDocument}}</span>
+              <span class="px-2">{{formatedDocument(exam.person.document)}}</span>
             </div>
           </div>
 
@@ -332,28 +332,25 @@ import moment from "moment";
 export default {
   name: "Exam-Report",
   props:{
-    exam: Object
-  },
-  computed:{
-    formatedDate(){
-      return moment(this.exam.exam_at).format("DD/MM/yyyy")
-    },
-    formatedHour(){
-      return moment(this.exam.exam_at).format("hh:mm")
-    },
-    formatedPhone(){
-      if(this.exam.person.phone.length == 10){
-        return this.exam.person.phone.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3')
-      }
-
-      return this.exam.person.phone.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3')
-    },
-    formatedDocument(){
-      return this.exam.person.document.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4')
-    }
+    exams: Object
   },
   methods:{
+    formatedDate(exam_at){
+      return moment(exam_at).format("DD/MM/yyyy")
+    },
+    formatedHour(exam_at){
+      return moment(exam_at).format("hh:mm")
+    },
+    formatedPhone(phone){
+      if(phone.length == 10){
+        return phone.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3')
+      }
 
+      return phone.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3')
+    },
+    formatedDocument(document){
+      return document.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4')
+    }
   },
   mounted(){
     setTimeout(()=>{

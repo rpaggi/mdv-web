@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use Carbon\Carbon;
+use Guiliredu\BrazilianCityMigrationSeed\Models\City;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -36,8 +37,17 @@ class ExamController extends Controller
             $build->where('exam_at', '<=', Carbon::parse($request->endDate)->endOfDay() );
         }
 
+        if($request->cityId){
+            $build->whereHas('person', function($query) use($request){
+                $query->where('address_city_id', $request->cityId);
+            });
+        }
+
+        $cities = City::with("state")->orderBy("title")->get();
+
         return Inertia::render('Exam/List',[
-            'exams' => $build->paginate(8)
+            'exams' => $build->paginate(8),
+            'cities' => $cities
         ]);
     }
 
@@ -60,7 +70,38 @@ class ExamController extends Controller
         $exam = Exam::with(['person', 'person.city', 'person.city.state'])->findOrFail($id);
 
         return Inertia::render('Exam/Report', [
-            "exam" => $exam
+            "exams" => [$exam]
+        ]);
+    }
+
+    public function formMultiReport(Request $request){
+        $build = Exam::with(['person', 'person.city', 'person.city.state']);
+
+        if($request->term){
+            $build->whereHas('person', function($query) use($request){
+                $query->where('document', $request->term)
+                    ->orWhere('name', 'like', "%$request->term%")
+                    ->orWhere('nickname', 'like', "%$request->term%")
+                    ->orWhere('phone', $request->term);
+            });
+        }
+
+        if($request->startDate){
+            $build->where('exam_at', '>=', Carbon::parse($request->startDate)->startOfDay() );
+        }
+
+        if($request->endDate){
+            $build->where('exam_at', '<=', Carbon::parse($request->endDate)->endOfDay() );
+        }
+
+        if($request->cityId){
+            $build->whereHas('person', function($query) use($request){
+                $query->where('address_city_id', $request->cityId);
+            });
+        }
+
+        return Inertia::render('Exam/Report', [
+            "exams" => $build->get()
         ]);
     }
 }

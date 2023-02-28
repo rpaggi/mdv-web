@@ -33,6 +33,7 @@ Route::middleware([
         Route::resource('products','ProductController')->except(["show"]);
         Route::resource('sells','SellController')->except(["edit", "update", "destroy"]);
         Route::post('sells/{id}/cancel','SellController@cancel')->name("sells.cancel");
+        Route::get('exams/multi-print','ExamController@formMultiReport')->name("exams.multi-print");
         Route::resource('exams','ExamController')->except(["edit", "update", "store", "create", "destroy"]);
         Route::get('exams/{id}/print','ExamController@formReport')->name("exams.print");
     });
