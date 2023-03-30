@@ -240,7 +240,7 @@
             </div>
           </div>
         </div>
-        <p class="mt-1" style="font-size: 11.7px">Durarnte o período de 15 dias de adaptação podem ocorrer os seguintes sintomas: Dor de cabeça, náuseas, tonturas e outros incômodos</p>
+        <p class="mt-1" style="font-size: 11.7px">Durante o período de 15 dias de adaptação podem ocorrer os seguintes sintomas: Dor de cabeça, náuseas, tonturas e outros incômodos</p>
 
         <hr style="border-top: 2px dashed rgba(0,0,0,0.7); width: 100%; margin: 15px 0px 5px">
 
