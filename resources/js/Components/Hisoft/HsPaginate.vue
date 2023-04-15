@@ -42,7 +42,7 @@ export default {
   },
   data(){
     return {
-      term: ''
+      filters: {}
     }
   },
   computed:{
@@ -50,19 +50,27 @@ export default {
       const cleanLinks = [ ...this.paginate.links ]
       cleanLinks.shift()
       cleanLinks.pop()
+
+      let filters = ''
+      Object.keys(this.filters).forEach(key=>{
+        filters = `${filters}&${key}=${this.filters[key]}`
+      })
+
       return cleanLinks.map(link=>({
         ...link,
-        url: this.term ? `${link.url}&term=${this.term}` : link.url
+        url: `${link.url}${filters}`
       }))
     }
   },
   beforeMount() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params)
 
-    if(params.term){
-      this.term = params.term
-    }
+    Object.keys(params).forEach(param=>{
+      if(param == "page") return
+      this.filters[param] = params[param]
+    })
   }
 }
 </script>
