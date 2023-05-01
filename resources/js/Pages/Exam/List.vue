@@ -25,9 +25,8 @@
                     v-model="dateRange"
                     range
                     locale="pt-BR"
-                    :enable-time-picker="false"
+                    :enable-time-picker="true"
                     :format="datepickerFormater"
-                    auto-apply
                     @update:modelValue="search"
                 />
               </div>
