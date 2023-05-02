@@ -30,11 +30,19 @@ class ExamController extends Controller
         }
 
         if($request->startDate){
-            $build->where('exam_at', '>=', Carbon::parse($request->startDate)->startOfDay() );
+            $build->whereDate('exam_at', '>=', Carbon::parse($request->startDate) );
         }
 
         if($request->endDate){
-            $build->where('exam_at', '<=', Carbon::parse($request->endDate)->endOfDay() );
+            $build->whereDate('exam_at', '<=', Carbon::parse($request->endDate) );
+        }
+
+        if($request->startTime){
+            $build->whereTime('exam_at', '>=', $request->startTime.":00" );
+        }
+
+        if($request->endTime){
+            $build->whereTime('exam_at', '<=', $request->endTime.":00" );
         }
 
         if($request->cityId){

@@ -11,7 +11,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
           <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
             <div class="flex space-x-4">
-              <div class="mb-5 w-4/12">
+              <div class="mb-5 w-6/12">
                 <input
                     type="text"
                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md px-4 py-2 inline-flex"
@@ -20,17 +20,27 @@
                     @keydown.enter.stop="search"
                 >
               </div>
-              <div class="mb-5 w-4/12">
+              <div class="mb-5 w-6/12">
                 <Datepicker
                     v-model="dateRange"
                     range
                     locale="pt-BR"
-                    :enable-time-picker="true"
+                    :enable-time-picker="false"
+                    auto-apply
                     :format="datepickerFormater"
                     @update:modelValue="search"
                 />
               </div>
-              <div class="mb-5 w-4/12 relative">
+
+              <div class="mb-5 w-6/12">
+                <hs-time-picker
+                    :items="hours"
+                    v-model="timeRange"
+                    @update:modelValue="search"
+                />
+              </div>
+
+              <div class="mb-5 w-6/12 relative">
                 <HsAutocomplete
                     placeholder="Cidade"
                     :list="citiesList"
@@ -81,6 +91,8 @@ import moment from 'moment';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import HsSwitch from "../../Components/Hisoft/HsSwitch.vue";
+import HsTimePicker from "../../Components/Hisoft/HsTimePicker.vue";
+import hours from '../../hours.json'
 
 export default {
   name: "Exam-List",
@@ -90,7 +102,8 @@ export default {
     HsPaginate,
     Datepicker,
     HsAutocomplete,
-    HsSwitch
+    HsSwitch,
+    HsTimePicker
   },
   props:{
     exams: Array,
@@ -100,8 +113,13 @@ export default {
     return{
       term: '',
       dateRange:null,
+      timeRange: {
+        first: null,
+        last: null
+      },
       city: null,
       select: false,
+      hours: hours,
       columns:[
         {
           class:'w-4/12',
@@ -145,6 +163,10 @@ export default {
 
       if(this.city){
         searchString = `${searchString}&cityId=${this.city.value.id}`
+      }
+
+      if(this.timeRange){
+        searchString = `${searchString}&startTime=${this.timeRange.first}&endTime=${this.timeRange.last}`
       }
 
       return searchString;
@@ -200,6 +222,12 @@ export default {
       this.dateRange = []
       this.dateRange[0] = moment(urlParams.get("startDate"))
       this.dateRange[1] = moment(urlParams.get("endDate"))
+    }
+    if(urlParams.get("startTime")){
+      this.timeRange = {
+        first:urlParams.get("startTime"),
+        last:urlParams.get("endTime")
+      }
     }
     if(urlParams.get("cityId")){
       let city = this.citiesList.find(city=>{
