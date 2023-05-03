@@ -161,7 +161,6 @@ export default {
       if(this.city){
         searchString = `${searchString}&cityId=${this.city.value.id}`
       }
-      console.log(this.timeRange)
       if(this.timeRange){
         searchString = `${searchString}&startTime=${this.timeRange.first}&endTime=${this.timeRange.last}`
       }

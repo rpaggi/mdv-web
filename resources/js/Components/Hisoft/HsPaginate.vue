@@ -65,7 +65,6 @@ export default {
   beforeMount() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    console.log(params)
 
     Object.keys(params).forEach(param=>{
       if(param == "page") return
