@@ -113,10 +113,7 @@ export default {
     return{
       term: '',
       dateRange:null,
-      timeRange: {
-        first: null,
-        last: null
-      },
+      timeRange: null,
       city: null,
       select: false,
       hours: hours,
@@ -164,7 +161,7 @@ export default {
       if(this.city){
         searchString = `${searchString}&cityId=${this.city.value.id}`
       }
-
+      console.log(this.timeRange)
       if(this.timeRange){
         searchString = `${searchString}&startTime=${this.timeRange.first}&endTime=${this.timeRange.last}`
       }
