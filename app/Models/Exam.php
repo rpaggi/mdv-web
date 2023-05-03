@@ -14,7 +14,8 @@ class Exam extends Model
     protected $fillable = [
         "person_id",
         "agent_id",
-        "exam_at"
+        "exam_at",
+        "notes"
     ];
 
     public function person(){

@@ -22,7 +22,8 @@ class SyncController extends Controller
             Exam::create([
                 "person_id" => $person->id,
                 "agent_id" => $data["user_id"],
-                "exam_at" => Carbon::parse($date." ".$hour)
+                "exam_at" => Carbon::parse($date." ".$hour),
+                "notes" => $data["notes"]
             ]);
         }catch(\Exception $e){
             \Log::error("[Erro ao gravar]");

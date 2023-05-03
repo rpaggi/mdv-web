@@ -82,6 +82,13 @@
                 <p>{{exam.person.acs ?? '-'}}</p>
               </div>
             </div>
+
+            <div class="flex mt-3">
+              <div class="w-full">
+                <p class="font-bold">Observações:</p>
+                <p>{{exam.notes ?? '-'}}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

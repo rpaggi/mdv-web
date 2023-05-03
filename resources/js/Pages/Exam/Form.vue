@@ -98,11 +98,17 @@
               </div>
             </div>
 
-            <div class="flex mt-3">
+            <div class="flex mt-3 gap-6">
               <div class="w-4/12">
                 <hs-input-text
                     label="ACS"
-                    v-model="exam.person.acs"
+                    v-model="form.person.acs"
+                />
+              </div>
+              <div class="w-8/12">
+                <hs-input-text
+                    label="Observações"
+                    v-model="form.notes"
                 />
               </div>
             </div>
