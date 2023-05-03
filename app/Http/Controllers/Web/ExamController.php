@@ -56,7 +56,7 @@ class ExamController extends Controller
         $cities = City::with("state")->orderBy("title")->get();
 
         return Inertia::render('Exam/List',[
-            'exams' => $build->paginate(8),
+            'exams' => $build->orderBy('exam_at', 'desc')->paginate(8),
             'cities' => $cities
         ]);
     }
