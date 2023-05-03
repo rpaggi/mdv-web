@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="cursor-pointer border border-gray shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md px-4 py-2 inline-flex text-gray-400" @click.stop="toggleShow">
+    <div class="cursor-pointer border border-gray shadow-sm focus:ring-system-500 focus:border-system-500 block w-full sm:text-sm border-gray-300 rounded-md px-4 py-2 inline-flex text-gray-400" @click.stop="toggleShow">
       <i class="far fa-clock" style="width: 1rem;padding: 3px 0"></i>
       <span class="px-3" v-if="firstSelected!==null && lastSelected!==null">
         {{items[minSelected]}} - {{items[maxSelected]}}

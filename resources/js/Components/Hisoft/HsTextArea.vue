@@ -3,7 +3,7 @@
   <div class="mt-1">
     <textarea
         :class="$attrs.class"
-        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md px-4 py-2"
+        class="shadow-sm focus:ring-system-500 focus:border-system-500 block w-full sm:text-sm border-gray-300 rounded-md px-4 py-2"
         :placeholder="placeholder"
         @input="$emit('update:modelValue', $event.target.value)"
         :disabled="disabled"

@@ -1,7 +1,7 @@
 <template>
   <label class="block text-sm font-medium text-gray-700">{{ label }}</label>
   <div class="mt-1">
-    <div class="relative shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-white">
+    <div class="relative shadow-sm focus:ring-system-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-white">
       <input
           type="text"
           :class="$attrs.class"

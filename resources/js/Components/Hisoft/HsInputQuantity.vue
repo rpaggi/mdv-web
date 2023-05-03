@@ -8,7 +8,7 @@
           :type="type"
           :value="modelValue"
           :class="$attrs.class"
-          class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-base border-gray-300 rounded-md px-4 py-2 mx-3 text-center"
+          class="shadow-sm focus:ring-system-500 focus:border-system-500 block w-full sm:text-base border-gray-300 rounded-md px-4 py-2 mx-3 text-center"
           :placeholder="placeholder"
           v-mask="'##########'"
           @input="$emit('update:modelValue', $event.target.value)"

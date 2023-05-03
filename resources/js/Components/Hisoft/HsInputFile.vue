@@ -14,7 +14,7 @@
     <label
         for="hs-upload"
         :class="$attrs.class"
-        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 bg-gray-100 rounded-md px-4 py-2 cursor-pointer hover:bg-indigo-300 hover:text-white"
+        class="shadow-sm focus:ring-system-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 bg-gray-100 rounded-md px-4 py-2 cursor-pointer hover:bg-indigo-300 hover:text-white"
     >
       <span v-if="files.length > 0">
         {{ files[0].name }}
