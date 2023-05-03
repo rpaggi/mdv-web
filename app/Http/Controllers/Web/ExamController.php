@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExamEditRequest;
 use App\Models\Exam;
+use App\Models\Person;
 use Carbon\Carbon;
 use Guiliredu\BrazilianCityMigrationSeed\Models\City;
 use Illuminate\Http\Request;
@@ -111,5 +113,28 @@ class ExamController extends Controller
         return Inertia::render('Exam/Report', [
             "exams" => $build->get()
         ]);
+    }
+
+    public function edit($id)
+    {
+        $exam = Exam::with(['person', 'person.city', 'person.city.state'])->findOrFail($id);
+
+        return Inertia::render('Exam/Form', [
+            "exam" => $exam,
+            "cities" => City::with("state")->orderBy("title")->get()
+        ]);
+    }
+
+    public function update(ExamEditRequest $request, $id){
+        $data = $request->all();
+        $data["exam_at"] = Carbon::parse($data["exam_at"])->setTimezone("America/Sao_Paulo");
+
+        $exam = Exam::findOrFail($id);
+        $exam->update($data);
+
+        $person = Person::findOrFail($data["person"]["id"]);
+        $person->update($data["person"]);
+
+        return redirect()->route('exams.show', ['exam' => $exam->id]);
     }
 }

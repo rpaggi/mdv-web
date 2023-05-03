@@ -16,6 +16,9 @@
                 <p>{{formatDateFull(exam.exam_at)}}</p>
               </div>
               <div class="w-8/12 flex justify-end space-x-4">
+                <a @click.stop="edit" type="button" class="w-3/12 flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                  <span>Editar</span>
+                </a>
                 <a @click.stop="print" type="button" class="w-3/12 flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                   <span>Imprimir Ficha</span>
                 </a>
@@ -128,6 +131,9 @@ export default {
     },
     print(){
       window.open(route('exams.print', {id:this.exam.id}), '_blank');
+    },
+    edit(){
+      this.$inertia.visit(route('exams.edit', {exam:this.exam.id}))
     }
   },
   mounted() {
