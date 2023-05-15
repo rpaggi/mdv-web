@@ -1,33 +1,34 @@
 <template>
+  <Head title="Ficha de impreessão" />
   <div class="book">
     <div v-for="exam in exams" class="page">
       <div class="subpage">
         <!-- CADASTRO -->
-        <div class="flex justify-between items-center">
-          <img src="/assets/img/logo.svg" style="height: 50px">
+        <div class="flex justify-between items-end">
           <h1 class="font-bold">CADASTRO</h1>
-          <p><span class="mr-4 inline">Data: {{formatedDate(exam.exam_at)}}</span> <span class="mr-4">Horário: {{ formatedHour(exam.exam_at) }}</span> <span>Atendimento: {{ exam.id }}</span></p>
+          <img src="/assets/img/logo.svg" style="height: 70px">
+          <p class="font-bold"><span>OS: {{ exam.id }}</span><span class="mx-4 inline">Data: {{formatedDate(exam.exam_at)}}</span> <span class="mr-4">Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
-        <div class="border border-gray-700 mt-2">
+        <div class="border border-gray-700">
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-7/12">
+            <div class="inline-block w-8/12">
               <span class="bg-gray-200 cell-a font-bold">Nome: </span>
               <span class="px-2">{{exam.person.name}}</span>
             </div>
-            <div class="inline-block w-5/12">
-              <span class="bg-gray-200 cell-a font-bold">Idade: </span>
-              <span class="px-2">{{exam.person.age}}</span>
+            <div class="inline-block w-4/12">
+              <span class="bg-gray-200 cell-a font-bold">Telefone: </span>
+              <span class="px-2">{{formatedPhone(exam.person.phone)}}</span>
             </div>
           </div>
 
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-7/12">
-              <span class="bg-gray-200 cell-a font-bold">Telefone: </span>
-              <span class="px-2">{{formatedPhone(exam.person.phone)}}</span>
+            <div class="inline-block w-8/12">
+              <span class="bg-gray-200 cell-a font-bold">Endereço: </span>
+              <span class="px-2">{{exam.person.address}}</span>
             </div>
-            <div class="inline-block w-5/12">
+            <div class="inline-block w-4/12">
               <span class="bg-gray-200 cell-a font-bold">CPF: </span>
               <span class="px-2">{{formatedDocument(exam.person.document)}}</span>
             </div>
@@ -35,23 +36,27 @@
 
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-7/12">
-              <span class="bg-gray-200 cell-a font-bold">Endereço: </span>
-              <span class="px-2">{{exam.person.address}}</span>
-            </div>
-            <div class="inline-block w-5/12">
+            <div class="inline-block w-4/12">
               <span class="bg-gray-200 cell-a font-bold">Cidade/UF: </span>
-              <span class="px-2">{{exam.person.city.title}}/{{exam.person.city.state.letter}}</span>
+              <span class="px-2">{{exam.person.city.title}} / {{exam.person.city.state.letter}}</span>
+            </div>
+            <div class="inline-block w-4/12">
+              <span class="bg-gray-200 cell-a font-bold">Apelido: </span>
+              <span class="px-2">{{exam.person.nickname}}</span>
+            </div>
+            <div class="inline-block w-4/12">
+              <span class="bg-gray-200 cell-a font-bold">Idade: </span>
+              <span class="px-2">{{exam.person.age}}</span>
             </div>
           </div>
 
           <!--ROW-->
           <div>
-            <div class="inline-block w-7/12">
-              <span class="bg-gray-200 cell-b font-bold">Ponto de Referencia: </span>
+            <div class="inline-block w-8/12">
+              <span class="bg-gray-200 cell-b font-bold">Ponto de Referência: </span>
               <span class="px-2">{{exam.person.address_reference}}</span>
             </div>
-            <div class="inline-block w-5/12">
+            <div class="inline-block w-4/12">
               <span class="bg-gray-200 cell-a font-bold">ACS: </span>
               <span class="px-2">{{exam.person.acs}}</span>
             </div>
@@ -60,42 +65,46 @@
 
         <hr style="border-top: 2px dashed rgba(0,0,0,0.7); width: 100%; margin: 15px 0px 5px">
 
-        <!-- CONSULTA -->
-        <div class="flex justify-between items-center">
-          <img src="/assets/img/logo.svg" style="height: 50px">
-          <h1 class="font-bold">CONSULTA</h1>
-          <p><span class="mr-4 inline">Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="mr-4">Horário:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span>Atendimento: {{ exam.id }}</span></p>
+        <!-- RECEITA -->
+        <div class="flex items-end">
+          <h1 class="font-bold mr-32">RECEITA</h1>
+          <img src="/assets/img/logo.svg" style="height: 70px">
+          <!-- p><span class="mr-4 inline">Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="mr-4">Horário:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span>Atendimento: {{ exam.id }}</span></p -->
         </div>
         <div class="border border-gray-700 mt-2">
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-6/12">
-              <span class="bg-gray-200 cell-a font-bold">Nome: </span>
-            </div>
-            <div class="inline-block w-6/12">
-              <span class="bg-gray-200 cell-a font-bold">CPF: </span>
+            <div class="inline-block w-12/12">
+              <span class="cell-a font-bold">Obs: </span>
+              <span class="px-2">{{exam.notes}}</span>
             </div>
           </div>
           <!--ROW-->
           <div class="border-b border-gray-700">
             <div class="inline-block w-6/12">
-              <div class="w-4/12 px-3 font-10 inline-block">
-                Diabétes <i class="far fa-circle"></i>
+              <div class="w-4/12 px-3 inline-block">
+                <div class="font-10 flex items-center gap-2">
+                  Diabetes <i class="far fa-square font-18"></i>
+                </div>
               </div>
               <div class="w-4/12 px-3 font-10 inline-block">
-                Hipertensão <i class="far fa-circle"></i>
+                <div class="font-10 flex items-center gap-2">
+                  Hipertensão <i class="far fa-square font-18"></i>
+                </div>
               </div>
               <div class="w-4/12 px-3 font-10 inline-block">
-                Grávida <i class="far fa-circle"></i>
+                <div class="font-10 flex items-center gap-2">
+                  Grávida <i class="far fa-square font-18"></i>
+                </div>
               </div>
             </div>
             <div class="inline-block w-6/12">
               <div class="inline-block">
-                <span class="bg-gray-200 cell-a font-bold">PIO: </span>
+                <span class="font-bold">PIO</span>
               </div>
               <div class="px-3 inline-block">
-                <span class="font-bold" style="margin-right: 100px">OD</span>
-                <span class="font-bold">OE</span>
+                <span style="margin-right: 100px">OD</span>
+                <span class="cell-a">OE</span>
               </div>
             </div>
           </div>
@@ -103,7 +112,7 @@
           <div class="border-b border-gray-700">
             <div class="inline-block w-6/12">
               <div class="inline-block">
-                <span class="bg-gray-200 cell-a font-bold">HGT </span>
+                <span class="cell-a font-bold">HGT: </span>
               </div>
               <div class="inline-block">
 
@@ -111,14 +120,18 @@
             </div>
             <div class="inline-block w-6/12">
               <div class="inline-block">
-                <span class="bg-gray-200 cell-a font-bold">Cirurgia: </span>
+                <span class="cell-a font-bold">Cirurgia: </span>
               </div>
               <div class="inline-block">
                 <div class="px-3 font-10 inline-block">
-                  Sim <i class="far fa-circle ml-2"></i>
+                  <div class="font-10 flex items-center gap-2">
+                    Sim <i class="far fa-square font-18 ml-2"></i>
+                  </div>
                 </div>
                 <div class="px-3 font-10 inline-block" style="margin-left: 40px">
-                  Não <i class="far fa-circle ml-2"></i>
+                  <div class="font-10 flex items-center gap-2">
+                    Não <i class="far fa-square font-18 ml-2"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -127,32 +140,38 @@
           <div class="border-b border-gray-700">
             <div class="inline-block w-6/12">
               <div class="inline-block">
-                <span class="bg-gray-200 cell-a font-bold">Usa Óculos: </span>
+                <span class="cell-a font-bold">Usa Óculos? </span>
               </div>
               <div class="inline-block">
                 <div class="px-3 font-10 inline-block">
-                  Sim <i class="far fa-circle ml-2"></i>
+                  <div class="font-10 flex items-center gap-2">
+                    Sim <i class="far fa-square font-18 ml-2"></i>
+                  </div>
                 </div>
                 <div class="px-3 font-10 inline-block" style="margin-left: 40px">
-                  Não <i class="far fa-circle ml-2"></i>
+                  <div class="font-10 flex items-center gap-2">
+                    Não <i class="far fa-square font-18 ml-2"></i>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="inline-block w-6/12">
               <div class="inline-block">
-                <span class="bg-gray-200 cell-a font-bold">Parou? </span>
+                <span class="cell-a font-bold">Parou? </span>
               </div>
               <div class="inline-block">
                 <div class="px-3 font-10 inline-block">
-                  Sim <i class="far fa-circle ml-2"></i>
+                  <div class="font-10 flex items-center gap-2">
+                    Sim <i class="far fa-square font-18 ml-2"></i>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-full bg-gray-200 font-bold text-center py-1">
-              RECEITA
+            <div class="inline-block w-full font-bold text-center py-1">
+              &nbsp
             </div>
           </div>
           <!--ROW-->
@@ -160,26 +179,26 @@
             <div class="inline-block w-2/12 border-r border-gray-700 py-1">
               &nbsp
             </div>
-            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold">
-              Esférico
+            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold text-center">
+              ESFÉRICO
             </div>
-            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold">
-              Cilindrico
+            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold text-center uppercase">
+              Cilíndrico
             </div>
-            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold">
+            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold text-center uppercase">
               Eixo
             </div>
-            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold">
+            <div class="inline-block w-2/12 border-r border-gray-700 p-1 font-bold text-center uppercase">
               DNP
             </div>
-            <div class="inline-block w-2/12 p-1 font-bold">
+            <div class="inline-block w-2/12 p-1 font-bold text-center uppercase">
               Altura
             </div>
           </div>
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-2/12 border-r border-gray-700 py-1 px-2 font-bold">
-              OD:
+            <div class="inline-block w-2/12 border-r border-gray-700 py-1 px-2 font-bold text-center">
+              OD
             </div>
             <div class="inline-block w-2/12 border-r border-gray-700 p-1">
               &nbsp
@@ -199,8 +218,8 @@
           </div>
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-2/12 border-r border-gray-700 py-1 px-2 font-bold">
-              OE:
+            <div class="inline-block w-2/12 border-r border-gray-700 py-1 px-2 font-bold text-center">
+              OE
             </div>
             <div class="inline-block w-2/12 border-r border-gray-700 p-1">
               &nbsp
@@ -219,24 +238,25 @@
             </div>
           </div>
           <!--ROW-->
-          <div class="border-b border-gray-700">
+          <div class="border-b border-gray-700 py-2 flex justify-center">
             <div class="inline-block w-6/12">
-              <span class="bg-gray-200 cell-a font-bold">Adição: </span>
+              <div class="flex items-center">
+                <span class="cell-a font-bold uppercase">Adição</span>
+                <div class="border border-black border-2 inline-block" style="width: 200px; height: 50px"></div>
+              </div>
             </div>
             <div class="inline-block w-6/12">
-              <span class="bg-gray-200 cell-a font-bold">Responsável: </span>
+              <div class="border border-black border-2 inline-block" style="width: 120px; height: 50px">
+                <div class="flex items-center justify-center" style="height: 50px">
+                  <span class="font-bold uppercase">Responsável</span>
+                </div>
+              </div>
             </div>
           </div>
           <!--ROW-->
           <div class="border-b border-gray-700">
             <div class="inline-block w-12/12">
-              <span class="bg-gray-200 cell-a font-bold">Tipo de Lente: </span>
-            </div>
-          </div>
-          <!--ROW-->
-          <div class="border-b border-gray-700">
-            <div class="inline-block w-full bg-gray-200 py-1">
-              &nbsp
+              <span class="cell-a font-bold">Tipo de Lente: </span>
             </div>
           </div>
         </div>
@@ -245,10 +265,10 @@
         <hr style="border-top: 2px dashed rgba(0,0,0,0.7); width: 100%; margin: 15px 0px 5px">
 
         <!-- DECLARACAO -->
-        <div class="flex justify-between items-center">
-          <img src="/assets/img/logo.svg" style="height: 50px">
+        <div class="flex justify-between items-end">
           <h1 class="font-bold">DECLARAÇÃO</h1>
-          <p><span class="mr-4 inline">Data: {{ formatedDate(exam.exam_at) }}</span> <span class="mr-4">Horário: {{ formatedHour(exam.exam_at) }}</span> <span>Atendimento: {{ exam.id }}</span></p>
+          <img src="/assets/img/logo.svg" style="height: 70px">
+          <p class="font-bold"><span>OS: {{ exam.id }}</span> <span class="mx-4 inline">Data: {{ formatedDate(exam.exam_at) }}</span> <span class="">Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
         <div class="border border-gray-700 mt-2">
           <!--ROW-->
@@ -271,24 +291,26 @@
             </div>
             <div class="inline-block w-5/12">
               <span class="bg-gray-200 cell-a font-bold">Cidade/UF: </span>
-              <span class="px-2">{{exam.person.city.title}}/{{exam.person.city.state.letter}}</span>
+              <span class="px-2">{{exam.person.city.title}} / {{exam.person.city.state.letter}}</span>
             </div>
           </div>
 
         </div>
-        <p class="mt-1 w-full text-center" style="font-size: 11.7px">
-          "Declaro para todos os fins, que recebi o exame oftalmológico de forma gratuita pela Associação Melhor de Ver".
-        </p>
-        <p class="w-full text-center font-bold" style="font-size: 13px">
-          "Declaro para todos os fins, estar ciente da livre escolha, na aquisição de qualquer medicamento, produtos, óculos, lentes e suas variadas marcas e modelos. Não tendo assim, a obrigatoriedade por qualquer estabelecimento que venha a ser indicado por terceiros.".
-        </p>
-        <div class="flex justify-center">
+
+        <div class="mt-8">
+          <p class="w-full text-center font-bold" style="font-size: 13px">
+            Declaro para todos os fins, estar ciente da livre escolha, na aquisição de qualquer medicamento, produtos, óculos, lentes e suas variadas marcas e modelos. Não tendo assim, a obrigatoriedade por qualquer estabelecimento que venha a ser indicado por terceiros. Autorizo a utilização da minha imagem por foto ou vídeo pela Associação Melhor de Ver.
+          </p>
+
+          <p class="w-full text-center font-bold" style="font-size: 14px">
+            "Declaro para todos os fins, que recebi o exame oftalmológico de forma gratuita pela Associação Melhor de Ver".
+          </p>
+        </div>
+
+        <div class="flex justify-center" style="margin-top: 95px;">
           <div class="border-t border-gray-700 w-7/12 mt-8 font-bold text-center pt-1">
             ASSINATURA
           </div>
-        </div>
-        <div class="flex justify-center mt-3">
-          <div class="w-3/12 border-4 border-black h-40"></div>
         </div>
       </div>
     </div>
@@ -297,11 +319,15 @@
 
 <script>
 import moment from "moment";
+import {Head} from "@inertiajs/inertia-vue3";
 
 export default {
   name: "Exam-Report",
   props:{
     exams: Object
+  },
+  components:{
+    Head
   },
   methods:{
     formatedDate(exam_at){
@@ -338,8 +364,7 @@ export default {
 .cell-a{
   width: 110px;
   display: inline-block;
-  padding: 0.28rem 0;
-  text-align: center;
+  padding: 0.28rem 0 0.28rem 10px;
 }
 .cell-b{
   width: 150px;
@@ -400,5 +425,8 @@ body {
 }
 .font-10{
   font-size: 10px;
+}
+.font-18{
+  font-size: 18px;
 }
 </style>
