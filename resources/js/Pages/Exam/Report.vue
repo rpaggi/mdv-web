@@ -36,7 +36,7 @@
 
           <!--ROW-->
           <div class="border-b border-gray-700">
-            <div class="inline-block w-4/12">
+            <div class="inline-block w-6/12">
               <span class="bg-gray-200 cell-a font-bold">Cidade/UF: </span>
               <span class="px-2">{{exam.person.city.title}} / {{exam.person.city.state.letter}}</span>
             </div>
@@ -44,8 +44,8 @@
               <span class="bg-gray-200 cell-a font-bold">Apelido: </span>
               <span class="px-2">{{exam.person.nickname}}</span>
             </div>
-            <div class="inline-block w-4/12">
-              <span class="bg-gray-200 cell-a font-bold">Idade: </span>
+            <div class="inline-block w-2/12">
+              <span class="bg-gray-200 cell-a font-bold" style="width: 70px">Idade: </span>
               <span class="px-2">{{exam.person.age}}</span>
             </div>
           </div>
@@ -307,7 +307,7 @@
           </p>
         </div>
 
-        <div class="flex justify-center" style="margin-top: 95px;">
+        <div class="flex justify-center" style="margin-top: 60px;">
           <div class="border-t border-gray-700 w-7/12 mt-8 font-bold text-center pt-1">
             ASSINATURA
           </div>
