@@ -35,15 +35,10 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/vue3';
-
 export default {
   name: "HsPaginate",
   props: {
     paginate: Object
-  },
-  components: {
-    InertiaLink: Link
   },
   data() {
     return {
