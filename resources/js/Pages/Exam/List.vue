@@ -71,6 +71,13 @@
               <template v-slot:examAt="data">
                 {{ formatDate(data.item.exam_at) }}
               </template>
+              <template v-slot:action="data">
+                <div class="flex justify-end">
+                  <div @click.stop="deleteItem(data.item.id)">
+                    <i class="far fa-trash hover:opacity-75"></i>
+                  </div>
+                </div>
+              </template>
             </hs-table>
 
             <hs-paginate :paginate="exams"></hs-paginate>
@@ -119,19 +126,24 @@ export default {
       hours: hours,
       columns:[
         {
-          class:'w-4/12',
+          class:'w-6/12',
           name: 'Nome',
           field: 'person.name'
         },
         {
-          class:'w-3/12',
+          class:'w-1/12',
           name: 'Documento',
           field: 'document'
         },
         {
-          class:'w-4/12',
+          class:'w-2/12',
           name: 'Data do Exame',
           field: 'examAt'
+        },
+        {
+          class:'w-1/12',
+          name: '',
+          field: 'action'
         },
       ],
     }
@@ -206,6 +218,29 @@ export default {
     print(){
       let searchString = this.getSearchString()
       window.open(`${route('exams.multi-print')}${searchString}`, '_blank');
+    },
+    deleteItem(id){
+      this.$swal.fire({
+        title: 'Você tem certeza que deseja excluir?',
+        text: "Essa ação é irreversível!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$axios.delete(route('exams.destroy', {exam:id})).then(response=>{
+            this.$toast.fire(
+                'O exame foi excluído!',
+                '',
+                'success'
+            )
+            this.$inertia.reload();
+          })
+        }
+      })
     }
   },
   mounted() {

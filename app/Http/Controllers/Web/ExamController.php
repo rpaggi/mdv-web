@@ -145,4 +145,10 @@ class ExamController extends Controller
 
         return redirect()->route('exams.show', ['exam' => $exam->id]);
     }
+
+    public function destroy($id){
+        Exam::findOrFail($id)->delete();
+
+        return response()->json('success');
+    }
 }
