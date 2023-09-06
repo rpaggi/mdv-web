@@ -57,8 +57,8 @@ class ExamController extends Controller
 
         return Inertia::render('Exam/List',[
             'exams' => $build
-                ->orderBy('person_name')
                 ->orderBy('exam_at', 'desc')
+                ->orderBy('person_name')
                 ->paginate(8),
             'cities' => $cities
         ]);
@@ -123,8 +123,9 @@ class ExamController extends Controller
 
         return Inertia::render('Exam/Report', [
             "exams" => $build
+                ->orderBy('exam_at', 'desc')
                 ->orderBy('person_name')
-                ->orderBy('exam_at', 'desc')->get()
+                ->get()
         ]);
     }
 
