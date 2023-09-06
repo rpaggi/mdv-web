@@ -20,9 +20,7 @@ class ExamController extends Controller
      */
     public function index(Request $request)
     {
-        $build = Exam::with(['person'=>function($query){
-            $query->orderBy('name');
-        }]);
+        $build = Exam::with(['person'])->withAggregate('person', 'name');
 
         if($request->term){
             $build->whereHas('person', function($query) use($request){
@@ -59,6 +57,7 @@ class ExamController extends Controller
 
         return Inertia::render('Exam/List',[
             'exams' => $build
+                ->orderBy('person_name')
                 ->orderBy('exam_at', 'desc')
                 ->paginate(8),
             'cities' => $cities
@@ -89,9 +88,7 @@ class ExamController extends Controller
     }
 
     public function formMultiReport(Request $request){
-        $build = Exam::with(['person'=>function($query){
-            $query->orderBy('name');
-        }, 'person.city', 'person.city.state']);
+        $build = Exam::with(['person', 'person.city', 'person.city.state'])->withAggregate('person', 'name');
 
         if($request->term){
             $build->whereHas('person', function($query) use($request){
@@ -125,7 +122,9 @@ class ExamController extends Controller
         }
 
         return Inertia::render('Exam/Report', [
-            "exams" => $build->orderBy('exam_at', 'desc')->get()
+            "exams" => $build
+                ->orderBy('person_name')
+                ->orderBy('exam_at', 'desc')->get()
         ]);
     }
 
