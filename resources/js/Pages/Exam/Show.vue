@@ -115,7 +115,7 @@ export default {
   },
   methods:{
     formatDateFull(date){
-      return moment(date).format('DD/MM/yyyy hh:mm')
+      return moment(date).format('DD/MM/yyyy HH:mm')
     },
     formatDate(date){
       return moment(date).format('DD/MM/yyyy')

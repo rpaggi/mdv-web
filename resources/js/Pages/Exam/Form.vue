@@ -159,7 +159,7 @@ export default {
   },
   methods:{
     formatDateFull(date){
-      return moment(date).format('DD/MM/yyyy hh:mm')
+      return moment(date).format('DD/MM/yyyy HH:mm')
     },
     goBack(){
       this.$inertia.visit(route('exams.show', {exam:this.exam.id}))

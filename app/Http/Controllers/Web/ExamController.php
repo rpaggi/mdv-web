@@ -119,7 +119,7 @@ class ExamController extends Controller
         }
 
         return Inertia::render('Exam/Report', [
-            "exams" => $build->get()
+            "exams" => $build->orderBy('exam_at', 'desc')->get()
         ]);
     }
 

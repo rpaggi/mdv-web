@@ -194,7 +194,7 @@ export default {
       this.search()
     },
     formatDate(date){
-      return moment(date).format('DD/MM/yyyy')
+      return moment(date).format('DD/MM/yyyy HH:mm')
     },
     formatDocument(cpf){
       if(!cpf) return ""
