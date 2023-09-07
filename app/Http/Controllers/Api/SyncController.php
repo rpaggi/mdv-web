@@ -12,10 +12,25 @@ class SyncController extends Controller
 {
     public function sync(Request $request){
         $data = $request->all();
+        \Log::info("[Sync Recebido] " . json_encode($data));
 
-        $data['address_city_id'] = $request->city["_id"];
         $date = substr($request->date, 6, 4)."-".substr($request->date, 3, 2)."-".substr($request->date, 0, 2);
         $hour = $request->hour.":00";
+
+        $exists = \DB::table('people as p')
+            ->join('exams as e', 'e.person_id', '=', 'p.id')
+            ->where('p.name', $data['name'])
+            ->where('p.document', $data['document'])
+            ->where('e.exam_at', Carbon::parse($date." ".$hour))
+            ->get();
+
+        if(count($exists) > 0){
+            \Log::info("[Entrada duplicada no SYNC]");
+            return response()->json(["status"=>true, "message"=>"Duplicate Entry"]);
+        }
+
+        $data['address_city_id'] = $request->city["_id"];
+
         try{
             $person = Person::create($data);
 
