@@ -32,6 +32,16 @@ class SyncController extends Controller
         $data['address_city_id'] = $request->city["_id"];
 
         try{
+            if(empty($data['age'])){
+                $data['age'] = 0;
+                \Log::info('[Erro de validacao] Campo idade nulo');
+            }
+
+            if(empty($data['phone'])){
+                $data['phone'] = 0;
+                \Log::info('[Erro de validacao] Campo telefone nulo');
+            }
+
             $person = Person::create($data);
 
             Exam::create([
