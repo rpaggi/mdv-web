@@ -13,6 +13,13 @@ class SyncController extends Controller
     public function sync(Request $request){
         $data = $request->all();
         \Log::info("[Sync Recebido] " . json_encode($data));
+        $nowMinus30Days = Carbon::now()->subDays(30);
+        $date = substr($request->date, 6, 4)."-".substr($request->date, 3, 2)."-".substr($request->date, 0, 2);
+
+        if(Carbon::parse($date)->lessThan(Carbon::now()->subDays(30))){
+            \Log::info("[Sync Ignorado] id: " . $request->_id);
+            return response()->json(["status"=>true, "message"=>"Exam date less than 30 days, this will be ignored."]);
+        }
 
         $date = substr($request->date, 6, 4)."-".substr($request->date, 3, 2)."-".substr($request->date, 0, 2);
         $hour = $request->hour.":00";
