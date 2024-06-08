@@ -305,6 +305,10 @@
           <p class="w-full text-center font-bold" style="font-size: 14px">
             "Declaro para todos os fins, que recebi o exame oftalmológico de forma gratuita pela Associação Melhor de Ver".
           </p>
+
+          <p class="w-full text-center font-bold" style="font-size: 14px">
+            Autorizo a Associação Melhor De Ver tratar meus Dados Pessoais de acordo com a LGPD e autorizo e concordo com seu arquivamento digital de acordo com o Decreto 10.278/2020.
+          </p>
         </div>
 
         <div class="flex justify-center" style="margin-top: 60px;">
