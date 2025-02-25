@@ -6,7 +6,7 @@
         <!-- CADASTRO -->
         <div class="flex justify-between items-end">
           <h1 class="font-bold">CADASTRO</h1>
-          <img src="/assets/img/logo.svg" style="height: 70px">
+          <img src="/assets/img/logo_mdv.svg" style="height: 70px">
           <p class="font-bold"><span>OS: {{ exam.id }}</span><span class="mx-4 inline">Data: {{formatedDate(exam.exam_at)}}</span> <span class="mr-4">Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
         <div class="border border-gray-700">
@@ -68,7 +68,7 @@
         <!-- RECEITA -->
         <div class="flex items-end">
           <h1 class="font-bold mr-32">RECEITA</h1>
-          <img src="/assets/img/logo.svg" style="height: 70px">
+          <img src="/assets/img/logo_mdv.svg" style="height: 70px">
           <!-- p><span class="mr-4 inline">Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="mr-4">Horário:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span>Atendimento: {{ exam.id }}</span></p -->
         </div>
         <div class="border border-gray-700 mt-2">
@@ -267,7 +267,7 @@
         <!-- DECLARACAO -->
         <div class="flex justify-between items-end">
           <h1 class="font-bold">DECLARAÇÃO</h1>
-          <img src="/assets/img/logo.svg" style="height: 70px">
+          <img src="/assets/img/logo_mdv.svg" style="height: 70px">
           <p class="font-bold"><span>OS: {{ exam.id }}</span> <span class="mx-4 inline">Data: {{ formatedDate(exam.exam_at) }}</span> <span class="">Horário: {{ formatedHour(exam.exam_at) }}</span></p>
         </div>
         <div class="border border-gray-700 mt-2">

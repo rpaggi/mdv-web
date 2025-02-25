@@ -1,3 +1,3 @@
 <template>
-  <img width="100" src="/assets/img/logo.svg">
+  <img width="100" src="/assets/img/logo_mdv.svg">
 </template>
