@@ -1,0 +1,47 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - master 
+    paths-ignore:
+      - '.manifests/**'
+
+env:
+  REGISTRY: registry.digitalocean.com
+  REPOSITORY: hisoft/mdv-web
+  NAMESPACE: mdv-prod
+  DEPLOYMENT_NAME: mdv-web
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 2000
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:latest .
+          docker tag ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:latest ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ github.sha }}
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ github.sha }}
+
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
+
+      - name: Update deployment
+        run: |
+          kubectl rollout restart deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }} 
