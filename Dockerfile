@@ -19,7 +19,6 @@ COPY --from=composer-builder /app/vendor ./vendor
 
 RUN npm install
 RUN npm run build
-# Verificar se os arquivos foram gerados
 RUN ls -la public/build/ || echo "Build directory not found"
 RUN find public -name "*.css" || echo "No CSS files found"
 
