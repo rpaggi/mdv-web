@@ -14,10 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if (app()->environment('production')) {
+            return;
+        }
+
         $this->call([
             \Guiliredu\BrazilianCityMigrationSeed\Database\Seeds\DatabaseSeeder::class,
             CreateRoles::class,
-            CreateMaster::class
+            CreateMaster::class,
+            CreateBaseSeeder::class,
         ]);
     }
 }
