@@ -34,6 +34,7 @@ RUN apk add --no-cache \
     zip \
     unzip \
     supervisor \
+    nginx \
     autoconf \
     libtool \
     build-base \
@@ -57,6 +58,9 @@ RUN mkdir -p /etc/supervisor.d/ /var/log/supervisor/ \
 
 COPY docker/supervisor/supervisord.ini /etc/supervisor.d/supervisord.ini
 RUN chmod 644 /etc/supervisor.d/supervisord.ini
+
+COPY docker/nginx/default.conf /etc/nginx/http.d/default.conf
+RUN mkdir -p /run/nginx
 
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
@@ -101,6 +105,6 @@ COPY docker/entrypoint.sh /etc/entrypoint.sh
 RUN chmod +x /etc/entrypoint.sh \
     && chown root:root /etc/entrypoint.sh
 
-EXPOSE 9000
+EXPOSE 80
 
 ENTRYPOINT ["sh", "/etc/entrypoint.sh"] 

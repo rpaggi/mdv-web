@@ -1,13 +1,10 @@
 #!/bin/sh
 
-# Garantir que as dependências estejam instaladas
-composer install --no-interaction --optimize-autoloader
-
 # Garantir permissões corretas
-chmod -R 777 /application/storage
+chmod -R 775 /application/storage
 
-# Iniciar supervisor em segundo plano
-supervisord -c /etc/supervisor.d/supervisord.ini &
+# Cria link simbólico para pasta storage (idempotente)
+php artisan storage:link 2>/dev/null || true
 
-# Iniciar PHP-FPM em primeiro plano
-exec php-fpm 
+# Iniciar nginx, php-fpm e queue worker via supervisor
+exec supervisord -c /etc/supervisor.d/supervisord.ini

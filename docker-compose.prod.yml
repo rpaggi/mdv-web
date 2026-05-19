@@ -1,0 +1,18 @@
+services:
+  app:
+    image: ghcr.io/rpaggi/mdv-web:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    env_file: /opt/mdv/.env
+    volumes:
+      - storage:/application/storage/app
+    networks:
+      - mdv
+
+volumes:
+  storage:
+
+networks:
+  mdv:
+    driver: bridge
