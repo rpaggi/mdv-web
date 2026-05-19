@@ -121,7 +121,7 @@ return [
 
         'loki' => [
             'driver'          => 'monolog',
-            'level'           => env('LOG_LEVEL', 'debug'),
+            'level'           => env('LOKI_LOG_LEVEL', env('LOG_LEVEL', 'debug')),
             'handler'         => \App\Logging\LokiHandler::class,
             'formatter'       => \Monolog\Formatter\JsonFormatter::class,
             'formatter_with'  => [
