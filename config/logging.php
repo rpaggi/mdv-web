@@ -118,6 +118,19 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'loki' => [
+            'driver'         => 'custom',
+            'via'            => \App\Logging\CreateLokiLogger::class,
+            'endpoint'       => env('LOKI_ENDPOINT'),
+            'app_name'       => env('APP_NAME', 'MDV'),
+            'tenant_id'      => env('LOKI_TENANT_ID', 'mdv-prod'),
+            'level'          => env('LOG_LEVEL', 'debug'),
+            'custom_headers' => [
+                'CF-Access-Client-Id'     => env('LOKI_CF_CLIENT_ID'),
+                'CF-Access-Client-Secret' => env('LOKI_CF_CLIENT_SECRET'),
+            ],
+        ],
     ],
 
 ];
