@@ -120,16 +120,25 @@ return [
         ],
 
         'loki' => [
-            'driver'         => 'custom',
-            'via'            => \App\Logging\CreateLokiLogger::class,
-            'endpoint'       => env('LOKI_ENDPOINT'),
-            'app_name'       => env('APP_NAME', 'MDV'),
-            'tenant_id'      => env('LOKI_TENANT_ID', 'mdv-prod'),
-            'level'          => env('LOG_LEVEL', 'debug'),
-            'custom_headers' => [
-                'CF-Access-Client-Id'     => env('LOKI_CF_CLIENT_ID'),
-                'CF-Access-Client-Secret' => env('LOKI_CF_CLIENT_SECRET'),
+            'driver'          => 'monolog',
+            'level'           => env('LOG_LEVEL', 'debug'),
+            'handler'         => \App\Logging\LokiHandler::class,
+            'formatter'       => \Monolog\Formatter\JsonFormatter::class,
+            'formatter_with'  => [
+                'appendNewline'      => false,
+                'includeStacktraces' => true,
             ],
+            'handler_with'    => [
+                'url'            => env('LOKI_ENDPOINT'),
+                'tenantId'       => env('LOKI_TENANT_ID', 'mdv-prod'),
+                'cfClientId'     => env('LOKI_CF_CLIENT_ID'),
+                'cfClientSecret' => env('LOKI_CF_CLIENT_SECRET'),
+                'labels'         => [
+                    'app' => env('APP_NAME', 'MDV'),
+                    'env' => env('APP_ENV', 'production'),
+                ],
+            ],
+            'processors'      => [\App\Logging\AppContextProcessor::class],
         ],
     ],
 

@@ -2,25 +2,18 @@
 
 namespace App\Logging;
 
-use Illuminate\Support\Facades\Auth;
-use Monolog\LogRecord;
-use Monolog\Processor\ProcessorInterface;
-
-class AppContextProcessor implements ProcessorInterface
+class AppContextProcessor
 {
-    public function __invoke(LogRecord $record): LogRecord
+    public function __invoke(array $record): array
     {
-        $extra = $record->extra;
-
-        if (Auth::check()) {
-            /** @var \App\Models\User $user */
-            $user = Auth::user();
-            $extra['user_id']    = (string) $user->id;
-            $extra['user_roles'] = $user->getRoleNames()->implode(',');
+        if (auth()->check()) {
+            $user = auth()->user();
+            $record['extra']['user_id']    = (string) $user->id;
+            $record['extra']['user_roles'] = $user->getRoleNames()->implode(',');
         }
 
-        $extra['request_id'] = request()->headers->get('X-Request-Id', uniqid('req_'));
+        $record['extra']['request_id'] = request()->headers->get('X-Request-Id', uniqid('req_'));
 
-        return $record->with(extra: $extra);
+        return $record;
     }
 }
