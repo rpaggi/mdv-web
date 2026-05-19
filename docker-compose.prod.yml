@@ -9,6 +9,16 @@ services:
       - storage:/application/storage/app
     networks:
       - mdv
+    logging:
+      driver: loki
+      options:
+        loki-url: "${LOKI_ENDPOINT}/loki/api/v1/push"
+        loki-tenant-id: "${LOKI_TENANT_ID}"
+        loki-external-labels: "job=mdv-web,env=production"
+        loki-header-cf-access-client-id: "${LOKI_CF_CLIENT_ID}"
+        loki-header-cf-access-client-secret: "${LOKI_CF_CLIENT_SECRET}"
+        loki-retries: "3"
+        loki-batch-wait: "1s"
 
 volumes:
   storage:

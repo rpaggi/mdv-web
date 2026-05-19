@@ -65,8 +65,8 @@ jobs:
 
       - name: Restart container
         run: |
-          docker compose -f /opt/mdv/docker-compose.yml up -d --force-recreate
+          docker compose -f /opt/mdv/docker-compose.yml --env-file /opt/mdv/.env up -d --force-recreate
           docker image prune -f
 
       - name: Run migrations
-        run: docker compose -f /opt/mdv/docker-compose.yml exec -T app php artisan migrate --force
+        run: docker compose -f /opt/mdv/docker-compose.yml --env-file /opt/mdv/.env exec -T app php artisan migrate --force
